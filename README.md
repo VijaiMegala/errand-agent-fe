@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Homie frontend
 
-## Getting Started
+A responsive MUI application for customers and service providers. Customers chat with the errand agent and explicitly confirm booking actions. Providers have a separate workspace for requests, services, and availability.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Start the backend API as described in [../backend/README.md](../backend/README.md), including its database and MCP service.
+2. In this directory, run `npm install` and `npm run dev`.
+3. Open http://localhost:3000 for customer chat or http://localhost:3000/provide for the provider workspace. Each screen offers the matching account registration flow.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The Next.js API route forwards login, registration, chat, provider, and notification requests to `BACKEND_URL` (default: `http://127.0.0.1:8000`). Set `BACKEND_URL` in `.env.local` when the backend runs elsewhere. The chat stream is forwarded without buffering.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Access tokens and their expiry are saved in browser local storage after login. A valid token is restored on reload and cleared on sign out or expiry. Tokens expire after 15 minutes, as defined by the backend. Customer conversations are listed in the sidebar. Opening one places its ID in the URL as `?sessionId=<uuid>`; loading that URL fetches that exact conversation. The root URL starts a new chat and gains a session ID after the backend creates it. You can switch, rename, or delete conversations in the sidebar. Booking actions always require confirmation from the proposal card. Pending approval cards cannot be restored after reload because the session message API returns only message text.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The notification bell is in the top right of both workspaces. It loads the latest 100 notifications, refreshes every 20 seconds while the tab is visible, and lets users mark items as read. Start the backend notification worker so booking events reach the inbox.
 
-## Learn More
+## Check
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Run `npm run build` for a production build.

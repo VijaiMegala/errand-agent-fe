@@ -1,0 +1,85 @@
+@media (max-width:1150px) {
+  .content-grid {
+    grid-template-columns:minmax(0,1fr) 240px;
+  }
+  .right-rail {
+    padding:23px 14px;
+  }
+  .workspace {
+    grid-template-columns:230px minmax(0,1fr);
+  }
+}
+@media (max-width:960px) {
+  .content-grid {
+    display:flex;
+  }
+  .right-rail {
+    display:none;
+  }
+}
+@media (max-width:700px) {
+  .workspace {
+    display:block;
+    padding:0;
+  }
+  .sidebar {
+    display:none;
+  }
+  .main-shell {
+    min-height:100dvh;
+    border:0;
+    border-radius:0;
+  }
+  .topbar {
+    height:69px;
+    padding:0 16px;
+  }
+  .mobile-menu {
+    display:inline-flex!important;
+  }
+  .online-pill {
+    display:none;
+  }
+  .chat-scroll {
+    padding:16px 20px;
+  }
+  .empty-state {
+    padding:24px 0;
+  }
+  .empty-state h1 {
+    font-size:39px;
+    letter-spacing:-2px;
+  }
+  .suggestion-grid {
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+  .suggestion-card {
+    min-height:67px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:12px;
+  }
+  .suggestion-icon {
+    flex:none;
+    margin:0;
+  }
+  .suggestions-label {
+    margin-top:25px;
+  }
+  .composer-wrap {
+    padding:9px 16px 17px;
+  }
+  .message-body {
+    max-width:87%;
+  }
+}
+.sidebar.mobile-sidebar {
+  display:flex;
+  height:100dvh;
+  min-height:100dvh;
+  width:270px;
+  position:static;
+  border-radius:0;
+}
